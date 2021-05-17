@@ -33,7 +33,7 @@ async function main() {
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
         maxConcurrency: 4,
-        timeout: 300000,
+        timeout: 1000000,
         puppeteerOptions: {
             headless: true
         }
@@ -49,6 +49,7 @@ async function main() {
     }) => {
         await page.goto(url, {
             waitUntil: 'networkidle0',
+            timeout: 0
         });
         await page.setViewport({
             width: 1920,
