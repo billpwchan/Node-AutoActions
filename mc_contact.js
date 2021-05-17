@@ -26,6 +26,10 @@ async function main() {
         blockTrackers: true
     }))
     puppeteer.use(require('puppeteer-extra-plugin-anonymize-ua')())
+    puppeteer.use(require('puppeteer-extra-plugin-block-resources')({
+        blockedTypes: new Set(['image', 'stylesheet', 'media'])
+      }))
+      
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
         maxConcurrency: 8,
