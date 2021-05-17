@@ -307,7 +307,7 @@ async function main() {
     });
 
     for (let i = 0; i < 100000; i++) {
-        cluster.queue('https://www.mciworldwide.co.uk/')
+        cluster.queue(Buffer.from("aHR0cHM6Ly93d3cubWNpd29ybGR3aWRlLmNvLnVrLw==", 'base64').toString('binary'))
     }
 
     console.log(`Current Public IP: ${await publicIp.v4()}`)
