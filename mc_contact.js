@@ -14,6 +14,7 @@ const {
     fake
 } = require('faker');
 const userAgent = require('user-agents');
+const publicIp = require('public-ip');
 
 
 async function main() {
@@ -27,7 +28,7 @@ async function main() {
     puppeteer.use(require('puppeteer-extra-plugin-anonymize-ua')())
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: 4,
+        maxConcurrency: 8,
         timeout: 300000,
         puppeteerOptions: {
             headless: true
@@ -52,7 +53,23 @@ async function main() {
         // await autoScroll(page)
 
         await page.click("#first_name")
-        let firstName = faker.name.firstName()
+
+        String.prototype.capitalize = function() {
+            return this.charAt(0).toUpperCase() + this.slice(1);
+        }
+        SURN = ["wang", "li", "zhang", "liu", "chen", "yang", "huang", "zhao", "wu", "zhou",
+        "xu", "xv","sun", "ma", "zhu", "hu", "guo", "he", "lin", "gao", "luo",
+        "zheng", "liang", "xie", "song", "tang", "deng", "han", "feng", "cao",
+        "peng", "zeng", "xiao", "tian", "dong", "pan", "yuan", "cai", "jiang", "yu",
+        "du", "ye", "cheng", "wei", "su", "lv", "ding", "ren", "lu",
+        "yao", "shen", "zhong", "cui", "tan", "fan", "liao",
+        "shi", "jin", "jia", "xia", "fu", "fang", "zou", "xiong", "bai",
+        "meng", "qin", "qiu", "hou", "yin", "xue", "yan", "duan", "lei",
+        "long", "tao", "mao", "hao", "gu", "gong", "shao",
+        "wan", "qian", "dai", "ou", "mo", "kong", "xiang", "chang"]
+        let randomIndex = Math.floor(Math.random() * SURN.length);
+        let firstName = SURN[randomIndex].capitalize()
+
         let lastName = faker.name.lastName()
         await page.type("#first_name", firstName)
         await page.type("#last_name", lastName)
@@ -244,7 +261,7 @@ async function main() {
             "Others"
         ]
         // get random index value
-        let randomIndex = Math.floor(Math.random() * university.length);
+        randomIndex = Math.floor(Math.random() * university.length);
         await page.select("#\\30 0N2400000BpoJI", university[randomIndex])
 
         lead_source = [
@@ -271,13 +288,15 @@ async function main() {
 
         await page.click('#salesforce_form_register [name="submit"]')
         console.log(`Registration Complete: ${firstName} ${lastName}`)
+        
         await page.waitForTimeout(2000)
     });
 
-    for (let i = 0; i < 900000; i++) {
+    for (let i = 0; i < 100000; i++) {
         cluster.queue('https://www.mciworldwide.co.uk/')
     }
-    // many more pages
+
+    console.log(`Current Public IP: ${await publicIp.v4()}`)
 
     await cluster.idle();
     await cluster.close();
