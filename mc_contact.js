@@ -56,6 +56,15 @@ async function main() {
             height: 1080
         });
         // await autoScroll(page)
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+            if(req.resourceType() === 'image'){
+                req.abort();
+            }
+            else {
+                req.continue();
+            }
+        });
 
         await page.click("#first_name")
 
