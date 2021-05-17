@@ -1,0 +1,33 @@
+{
+  "name": "node-autoactions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "clicker.js",
+  "dependencies": {
+    "faker": "^5.5.3",
+    "puppeteer": "^5.5.0",
+    "puppeteer-cluster": "^0.22.0",
+    "puppeteer-extra": "^3.1.18",
+    "puppeteer-extra-plugin-adblocker": "^2.11.11",
+    "puppeteer-extra-plugin-anonymize-ua": "^2.2.17",
+    "puppeteer-extra-plugin-recaptcha": "^3.4.0",
+    "puppeteer-extra-plugin-stealth": "^2.7.8",
+    "random-useragent": "^0.5.0",
+    "txtgen": "^2.2.8",
+    "user-agents": "^1.0.655"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/billpwchan/Node-AutoActions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/billpwchan/Node-AutoActions/issues"
+  },
+  "homepage": "https://github.com/billpwchan/Node-AutoActions#readme"
+}
