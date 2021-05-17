@@ -66,6 +66,7 @@ async function main() {
             }
         });
 
+        await page.waitForSelector("#first_name")
         await page.click("#first_name")
 
         String.prototype.capitalize = function() {
