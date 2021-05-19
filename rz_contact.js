@@ -74,7 +74,7 @@ async function main() {
         await page.waitForTimeout(1000)
     });
 
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 1000000; i++) {
         cluster.queue(Buffer.from("aHR0cHM6Ly93d3cucmVoZXJ0ei5jb20vY29udGFjdC8=", 'base64').toString('binary'))
 
     }
