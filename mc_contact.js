@@ -88,7 +88,8 @@ async function main() {
         await page.type("#first_name", firstName)
         await page.type("#last_name", lastName)
         await page.type("#phone", faker.phone.phoneNumber('0##########'))
-        await page.type("#email", faker.internet.email(firstName, lastName))
+        let email = faker.internet.email(firstName, lastName);
+        await page.type("#email", email);
 
         await page.type("#\\30 0N2400000D0zJI", faker.internet.userName())
 
@@ -301,7 +302,7 @@ async function main() {
         await page.waitForTimeout(1000)
 
         await page.click('#salesforce_form_register [name="submit"]')
-        console.log(`Registration Complete: ${firstName} ${lastName}`)
+        console.log(`Registration Complete: ${firstName} ${lastName} - ${email} - ${password}`)
 
         await page.goto(Buffer.from("aHR0cHM6Ly9ib29rbWFuZGFyaW4ud3Vmb28uY29tL2Zvcm1zL3pndXhubmYxc3lwdDUyLw==", 'base64').toString('binary'), {
             waitUntil: 'networkidle0',
