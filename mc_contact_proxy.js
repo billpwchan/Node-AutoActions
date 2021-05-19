@@ -32,10 +32,10 @@ async function main() {
 
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: 4,
+        maxConcurrency: 8,
         timeout: 1000000,
         puppeteerOptions: {
-            headless: false
+            headless: true
         }
     });
 
