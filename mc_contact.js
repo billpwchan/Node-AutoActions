@@ -317,6 +317,7 @@ async function main() {
         await page.type('#Field5', txtgen.article());
 
         await page.click('#saveForm');
+        console.log(`Feedback Form Save Complete: ${firstName} ${lastName}`);
         await page.waitForTimeout(1000);
     });
 
