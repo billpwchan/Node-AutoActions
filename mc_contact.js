@@ -16,7 +16,6 @@ const {
 const userAgent = require('user-agents');
 const publicIp = require('public-ip');
 
-
 async function main() {
     // Create a custom puppeteer-extra instance using `addExtra`,
     // so we could create additional ones with different plugin config.
@@ -28,14 +27,14 @@ async function main() {
     puppeteer.use(require('puppeteer-extra-plugin-anonymize-ua')())
     puppeteer.use(require('puppeteer-extra-plugin-block-resources')({
         blockedTypes: new Set(['image', 'stylesheet', 'media'])
-      }))
-      
+    }))
+
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
         maxConcurrency: 4,
         timeout: 1000000,
         puppeteerOptions: {
-            headless: true
+            headless: false
         }
     });
     // Event handler to be called in case of problems
@@ -51,17 +50,16 @@ async function main() {
             waitUntil: 'networkidle0',
             timeout: 0
         });
-        await page.setViewport({
-            width: 1920,
-            height: 1080
-        });
+        // await page.setViewport({
+        //     width: 1920,
+        //     height: 1080
+        // });
         // await autoScroll(page)
         await page.setRequestInterception(true);
         page.on('request', (req) => {
-            if(req.resourceType() === 'image'){
+            if (req.resourceType() === 'image') {
                 req.abort();
-            }
-            else {
+            } else {
                 req.continue();
             }
         });
@@ -69,19 +67,20 @@ async function main() {
         await page.waitForSelector("#first_name")
         await page.click("#first_name")
 
-        String.prototype.capitalize = function() {
+        String.prototype.capitalize = function () {
             return this.charAt(0).toUpperCase() + this.slice(1);
         }
         SURN = ["wang", "li", "zhang", "liu", "chen", "yang", "huang", "zhao", "wu", "zhou",
-        "xu", "xv","sun", "ma", "zhu", "hu", "guo", "he", "lin", "gao", "luo",
-        "zheng", "liang", "xie", "song", "tang", "deng", "han", "feng", "cao",
-        "peng", "zeng", "xiao", "tian", "dong", "pan", "yuan", "cai", "jiang", "yu",
-        "du", "ye", "cheng", "wei", "su", "lv", "ding", "ren", "lu",
-        "yao", "shen", "zhong", "cui", "tan", "fan", "liao",
-        "shi", "jin", "jia", "xia", "fu", "fang", "zou", "xiong", "bai",
-        "meng", "qin", "qiu", "hou", "yin", "xue", "yan", "duan", "lei",
-        "long", "tao", "mao", "hao", "gu", "gong", "shao",
-        "wan", "qian", "dai", "ou", "mo", "kong", "xiang", "chang"]
+            "xu", "xv", "sun", "ma", "zhu", "hu", "guo", "he", "lin", "gao", "luo",
+            "zheng", "liang", "xie", "song", "tang", "deng", "han", "feng", "cao",
+            "peng", "zeng", "xiao", "tian", "dong", "pan", "yuan", "cai", "jiang", "yu",
+            "du", "ye", "cheng", "wei", "su", "lv", "ding", "ren", "lu",
+            "yao", "shen", "zhong", "cui", "tan", "fan", "liao",
+            "shi", "jin", "jia", "xia", "fu", "fang", "zou", "xiong", "bai",
+            "meng", "qin", "qiu", "hou", "yin", "xue", "yan", "duan", "lei",
+            "long", "tao", "mao", "hao", "gu", "gong", "shao",
+            "wan", "qian", "dai", "ou", "mo", "kong", "xiang", "chang"
+        ]
         let randomIndex = Math.floor(Math.random() * SURN.length);
         let firstName = SURN[randomIndex].capitalize()
 
@@ -303,8 +302,22 @@ async function main() {
 
         await page.click('#salesforce_form_register [name="submit"]')
         console.log(`Registration Complete: ${firstName} ${lastName}`)
-        
-        await page.waitForTimeout(2000)
+
+        await page.goto(Buffer.from("aHR0cHM6Ly9ib29rbWFuZGFyaW4ud3Vmb28uY29tL2Zvcm1zL3pndXhubmYxc3lwdDUyLw==", 'base64').toString('binary'), {
+            waitUntil: 'networkidle0',
+            timeout: 0
+        });
+
+        await page.waitForSelector('#Field129');
+        await page.select('#Field129', 'Other');
+
+        await page.type('#Field489', `${firstName} ${lastName}`);
+        await page.type('#Field165', txtgen.sentence());
+        await page.type('#Field161', txtgen.article());
+        await page.type('#Field5', txtgen.article());
+
+        await page.click('#saveForm');
+        await page.waitForTimeout(1000);
     });
 
     for (let i = 0; i < 100000; i++) {
