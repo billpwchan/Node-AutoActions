@@ -46,6 +46,15 @@ async function main() {
         page,
         data: url
     }) => {
+        await page.setRequestInterception(true);
+        page.on('request', (req) => {
+            if (req.resourceType() === 'image') {
+                req.abort();
+            } else {
+                req.continue();
+            }
+        });
+
         await page.goto(url, {
             waitUntil: 'networkidle0',
             timeout: 0
@@ -55,14 +64,7 @@ async function main() {
         //     height: 1080
         // });
         // await autoScroll(page)
-        await page.setRequestInterception(true);
-        page.on('request', (req) => {
-            if (req.resourceType() === 'image') {
-                req.abort();
-            } else {
-                req.continue();
-            }
-        });
+
 
         await page.waitForSelector("#first_name")
         await page.click("#first_name")
@@ -83,7 +85,6 @@ async function main() {
         ]
         let randomIndex = Math.floor(Math.random() * SURN.length);
         let firstName = SURN[randomIndex].capitalize()
-
         let lastName = faker.name.lastName()
         await page.type("#first_name", firstName)
         await page.type("#last_name", lastName)
@@ -309,7 +310,7 @@ async function main() {
             timeout: 0
         });
 
-        await page.waitForSelector('#Field129');
+        // await page.waitForSelector('#Field129');
         await page.select('#Field129', 'Other');
 
         await page.type('#Field489', `${firstName} ${lastName}`);
