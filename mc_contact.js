@@ -34,7 +34,7 @@ async function main() {
         maxConcurrency: 4,
         timeout: 1000000,
         puppeteerOptions: {
-            headless: false
+            headless: true
         }
     });
     // Event handler to be called in case of problems
