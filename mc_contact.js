@@ -59,13 +59,6 @@ async function main() {
             waitUntil: 'networkidle0',
             timeout: 0
         });
-        // await page.setViewport({
-        //     width: 1920,
-        //     height: 1080
-        // });
-        // await autoScroll(page)
-
-
         await page.waitForSelector("#first_name")
         await page.click("#first_name")
 
