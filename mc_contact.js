@@ -46,6 +46,9 @@ async function main() {
         page,
         data: url
     }) => {
+        page.on('requestfailed', request => {
+            console.log(`url: ${request.url()}, errText: ${request.failure().errorText}, method: ${request.method()}`)
+        });
         await page.setRequestInterception(true);
         page.on('request', (req) => {
             if (req.resourceType() === 'image') {

@@ -49,15 +49,14 @@ async function main() {
         data: url
     }) => {
         await useProxy(page, Buffer.from("c29ja3M1Oi8vMXptVmpXTWVpM3BlQ3dnQzV2S1VIU2dVOmd5a3JwNXlWN2gyWHZVRHpDcW9rb3JWd0BkdWJsaW4uaWUuc29ja3Mubm9yZGhvbGQubmV0OjEwODA=", 'base64').toString('binary'));
+        page.on('requestfailed', request => {
+            console.log(`url: ${request.url()}, errText: ${request.failure().errorText}, method: ${request.method()}`)
+        });
         await page.goto(url, {
             waitUntil: 'networkidle0',
             timeout: 0
         });
-        await page.setViewport({
-            width: 1920,
-            height: 1080
-        });
-        // await autoScroll(page)
+
         await page.setRequestInterception(true);
         page.on('request', (req) => {
             if (req.resourceType() === 'image') {
