@@ -74,6 +74,9 @@ async function main() {
 
         await page.type('#mc4wp-form-1 > div.mc4wp-form-fields > div > div > input[type=email]', faker.internet.email(firstName, lastName));
         await page.click('#mc4wp-form-1 > div.mc4wp-form-fields > div > button');
+
+        console.log(`Subscription Complete: ${firstName} ${lastName}`);
+
     });
 
     for (let i = 0; i < 100000; i++) {
