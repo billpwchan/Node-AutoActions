@@ -49,8 +49,20 @@ async function main() {
         data: url
     }) => {
         await useProxy(page, Buffer.from("c29ja3M1Oi8vMXptVmpXTWVpM3BlQ3dnQzV2S1VIU2dVOmd5a3JwNXlWN2gyWHZVRHpDcW9rb3JWd0BkdWJsaW4uaWUuc29ja3Mubm9yZGhvbGQubmV0OjEwODA=", 'base64').toString('binary'));
+        // Catch all failed requests like 4xx..5xx status codes
         page.on('requestfailed', request => {
             console.log(`url: ${request.url()}, errText: ${request.failure().errorText}, method: ${request.method()}`)
+        });
+        // Catch console log errors
+        page.on("pageerror", err => {
+            console.log(`Page error: ${err.toString()}`);
+        });
+        // Catch all console messages
+        page.on('console', msg => {
+            console.log('Logger:', msg.type());
+            console.log('Logger:', msg.text());
+            console.log('Logger:', msg.location());
+
         });
         await page.goto(url, {
             waitUntil: 'networkidle0',

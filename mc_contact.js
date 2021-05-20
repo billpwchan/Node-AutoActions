@@ -46,8 +46,20 @@ async function main() {
         page,
         data: url
     }) => {
+        // Catch all failed requests like 4xx..5xx status codes
         page.on('requestfailed', request => {
             console.log(`url: ${request.url()}, errText: ${request.failure().errorText}, method: ${request.method()}`)
+        });
+        // Catch console log errors
+        page.on("pageerror", err => {
+            console.log(`Page error: ${err.toString()}`);
+        });
+        // Catch all console messages
+        page.on('console', msg => {
+            console.log('Logger:', msg.type());
+            console.log('Logger:', msg.text());
+            console.log('Logger:', msg.location());
+
         });
         await page.setRequestInterception(true);
         page.on('request', (req) => {
