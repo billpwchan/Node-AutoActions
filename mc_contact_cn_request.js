@@ -14,7 +14,7 @@ const sendPostRequest = async () => {
     var randomIndex_lead = Math.floor(Math.random() * lead_source.length);
     var password = faker.internet.password()
 
-    var email = faker.internet.email();
+    var email = faker.internet.email(faker.name.firstName(), faker.name.lastName(), faker.random.word() + '.' + faker.random.word());
 
 
     var data = new FormData();
