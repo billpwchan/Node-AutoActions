@@ -94,7 +94,7 @@ async function main() {
         await page.click('#login_frame > ul.form > form > li.submit > input[type=submit]')
         console.log(`Registration Complete: ${fullName} - ${email} - ${password}`)
 
-        await page.waitForTimeout(500)
+        await page.waitForTimeout(1000)
     });
 
     for (let i = 0; i < 100000; i++) {
