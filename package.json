@@ -4,8 +4,10 @@
   "description": "",
   "main": "clicker.js",
   "dependencies": {
+    "axios": "^0.21.1",
     "chinese-random-name": "^1.0.0",
     "faker": "^5.5.3",
+    "form-data": "^4.0.0",
     "public-ip": "^4.0.3",
     "puppeteer": "^5.5.0",
     "puppeteer-cluster": "^0.22.0",
@@ -17,6 +19,7 @@
     "puppeteer-extra-plugin-stealth": "^2.7.8",
     "puppeteer-page-proxy": "^1.2.8",
     "random-useragent": "^0.5.0",
+    "request": "^2.88.2",
     "txtgen": "^2.2.8",
     "user-agents": "^1.0.655"
   },
