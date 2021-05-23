@@ -47,11 +47,6 @@ async function main() {
         page,
         data: url
     }) => {
-        // Catch all failed requests like 4xx..5xx status codes
-        // page.on('requestfailed', request => {
-        //     console.log(`url: ${request.url()}, errText: ${request.failure().errorText}, method: ${request.method()}`)
-        // });
-
         await page.setRequestInterception(true);
         page.on('request', (req) => {
             if (req.resourceType() === 'image') {
