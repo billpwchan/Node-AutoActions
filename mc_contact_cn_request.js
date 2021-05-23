@@ -48,4 +48,4 @@ const sendPostRequest = async () => {
         });
 }
 
-setInterval(sendPostRequest, 10);
+setInterval(sendPostRequest, 1000);
