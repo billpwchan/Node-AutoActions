@@ -5,6 +5,7 @@ const lead_source = ["LinkedIn领英", "Google/other search", "University semina
 const url = Buffer.from("aHR0cDovL3d3dy5tY2l3b3JsZHdpZGUuY29tLmNuL3JlZ19zYXZlMi5waHA/SG9zdD0gd3d3Lm1jaXdvcmxkd2lkZS5jb20uY24mQ29ubmVjdGlvbj0ga2VlcC1hbGl2ZSZPcmlnaW49IGh0dHA6Ly93d3cubWNpd29ybGR3aWRlLmNvbS5jbiZSZWZlcmVyPSBodHRwOi8vd3d3Lm1jaXdvcmxkd2lkZS5jb20uY24vcmVnLnBocA==", 'base64').toString('binary')
 var axios = require('axios');
 var FormData = require('form-data');
+const txtgen = require('txtgen');
 
 const sendPostRequest = async () => {
 
@@ -25,6 +26,7 @@ const sendPostRequest = async () => {
     data.append('wechatid', faker.internet.userName());
     data.append('Phone', faker.phone.phoneNumber('1##########'));
     data.append('knowabout', lead_source[randomIndex_lead]);
+    data.append('liuyan22', txtgen.paragraph())
     data.append('password', password);
     data.append('password2', password);
 

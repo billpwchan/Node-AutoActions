@@ -16,6 +16,7 @@ const {
 const userAgent = require('user-agents');
 const publicIp = require('public-ip');
 var randomName = require("chinese-random-name");
+const txtgen = require('txtgen');
 
 async function main() {
     // Create a custom puppeteer-extra instance using `addExtra`,
@@ -73,7 +74,7 @@ async function main() {
 
         await page.type("#Phone", faker.phone.phoneNumber('1##########'))
 
-        let email = faker.internet.email();
+        let email = faker.internet.email(faker.name.firstName(), faker.name.lastName(), faker.random.word() + '.' + faker.random.word());
         await page.type("#Email", email);
 
         await page.type("#wechatid", faker.internet.userName())
