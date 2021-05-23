@@ -4,6 +4,7 @@
   "description": "",
   "main": "clicker.js",
   "dependencies": {
+    "chinese-random-name": "^1.0.0",
     "faker": "^5.5.3",
     "public-ip": "^4.0.3",
     "puppeteer": "^5.5.0",
