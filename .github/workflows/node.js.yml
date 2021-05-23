@@ -23,7 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: node rz_contact.js
-  mc_uk:
+  mc_cn:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -37,7 +37,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm install
     - run: node mc_contact_cn.js
-  mc_cn:
+  mc_cn_request:
     runs-on: ubuntu-latest
     strategy:
       matrix:
