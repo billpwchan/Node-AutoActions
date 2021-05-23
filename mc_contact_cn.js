@@ -99,7 +99,6 @@ async function main() {
 
     for (let i = 0; i < 100000; i++) {
         cluster.queue(Buffer.from("aHR0cDovL3d3dy5tY2l3b3JsZHdpZGUuY29tLmNuL3JlZy5waHA=", 'base64').toString('binary'))
-        // cluster.queue(Buffer.from("aHR0cDovL3d3dy5tY2l3b3JsZHdpZGUuY29tLmNuLw==", 'base64').toString('binary'))
     }
 
     console.log(`Current Public IP: ${await publicIp.v4()}`)
