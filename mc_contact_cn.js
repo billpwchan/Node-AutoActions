@@ -16,7 +16,6 @@ const {
 const userAgent = require('user-agents');
 const publicIp = require('public-ip');
 var randomName = require("chinese-random-name");
-const txtgen = require('txtgen');
 
 async function main() {
     // Create a custom puppeteer-extra instance using `addExtra`,
