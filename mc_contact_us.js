@@ -108,7 +108,7 @@ async function main() {
         console.log(`Registration Complete: ${firstName} ${lastName} - ${email} - ${password}`)
 
 
-        await page.waitForTimeout(10000);
+        await page.waitForTimeout(1000);
     });
 
     for (let i = 0; i < 100000; i++) {
