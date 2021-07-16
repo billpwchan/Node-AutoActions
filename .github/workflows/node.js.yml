@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '10 * * 1 *'
+    - cron: '10 * * * *'
 
 jobs:
 #   mc_cn_request:
@@ -23,7 +23,7 @@ jobs:
 #         node-version: ${{ matrix.node-version }}
 #     - run: npm install
 #     - run: node mc_contact_cn_request.js
-  mc_uk:
+  mc_us:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,4 +36,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: node mc_contact.js
+    - run: node mc_contact_us.js
