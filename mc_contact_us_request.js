@@ -9,7 +9,6 @@ const url = Buffer.from("aHR0cHM6Ly93ZWJ0by5zYWxlc2ZvcmNlLmNvbS9zZXJ2bGV0L3NlcnZ
 const returl = Buffer.from("aHR0cHM6Ly93d3cubWNpd29ybGR3aWRlLmNvbS9sb2dpbi1yZWdpc3Rlci90aGFuay15b3UtZm9yLXJlZ2lzdGVyaW5nLw==", 'base64').toString('binary')
 var axios = require('axios');
 var FormData = require('form-data');
-var randomstring = require("randomstring");
 
 
 const sendPostRequest = async () => {
@@ -24,13 +23,14 @@ const sendPostRequest = async () => {
 
 
     var data = new FormData();
-    data.append('oid', randomstring.generate(15));
+    data.append('oid', '00D24000001aVwj');
     data.append('retURL', returl);
     data.append('first_name', firstName);
     data.append('last_name', lastName);
     data.append('phone', faker.phone.phoneNumber('0##########'));
     data.append('00N2400000BpoJI', university[randomIndex_uni]);
     data.append('email', email);
+    data.append('Campaign_ID', '7011o000000cBhI');
     data.append('lead_source', lead_source[randomIndex_lead]);
     data.append('member_status', 'Responded');
     data.append('password', password);
