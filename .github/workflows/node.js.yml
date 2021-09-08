@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '5 * * 1 *'
+    - cron: '* * * * *'
 
 jobs:
 #   mc_cn_request:
@@ -23,7 +23,21 @@ jobs:
 #         node-version: ${{ matrix.node-version }}
 #     - run: npm install
 #     - run: node mc_contact_cn_request.js
-  mc_us_request:
+#   mc_us_request:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       matrix:
+#         node-version: [12.x, 13.x, 14.x, 15.x, 12.x, 13.x, 14.x, 15.x]
+#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+#     steps:
+#     - uses: actions/checkout@v2
+#     - name: Use Node.js ${{ matrix.node-version }}
+#       uses: actions/setup-node@v2
+#       with:
+#         node-version: ${{ matrix.node-version }}
+#     - run: npm install
+#     - run: node mc_contact_us_request.js
+  mc_cn:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,18 +50,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm install
-    - run: node mc_contact_us_request.js
-#   mc_cn:
-#     runs-on: ubuntu-latest
-#     strategy:
-#       matrix:
-#         node-version: [12.x, 13.x, 14.x, 15.x]
-#         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-#     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use Node.js ${{ matrix.node-version }}
-#       uses: actions/setup-node@v2
-#       with:
-#         node-version: ${{ matrix.node-version }}
-#     - run: npm install
-#     - run: node mc_contact_cn.js
+    - run: node mc_contact_cn_request.js
