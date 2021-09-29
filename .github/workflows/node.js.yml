@@ -6,7 +6,7 @@ on:
   pull_request:
     branches: [ master ]
   schedule:
-    - cron: '* * * * *'
+    - cron: '59 * * * *'
 
 jobs:
 #   mc_cn_request:
