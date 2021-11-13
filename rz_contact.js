@@ -32,10 +32,10 @@ async function main() {
 
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: 4,
+        maxConcurrency: 1,
         timeout: 300000,
         puppeteerOptions: {
-            headless: true
+            headless: false
         }
     });
     // Event handler to be called in case of problems
@@ -63,19 +63,19 @@ async function main() {
         let firstName = faker.name.firstName();
         let lastName = faker.name.lastName();
 
-        await page.type('#wpforms-10-field_0', `${firstName} ${lastName}`)
-        await page.type('#wpforms-10-field_1', faker.internet.email());
-        await page.type('#wpforms-10-field_2', txtgen.paragraph());
+        await page.type('#wpforms-23-field_0', `${firstName} ${lastName}`)
+        await page.type('#wpforms-23-field_1', faker.internet.email());
+        await page.type('#wpforms-23-field_2', txtgen.paragraph());
 
-        await page.click('#wpforms-submit-10');
+        await page.click('#wpforms-submit-23');
 
         console.log(`Contact Form Submitted: ${firstName} ${lastName}`);
 
-        await page.waitForTimeout(1000)
+        await page.waitForTimeout(10000)
     });
 
     for (let i = 0; i < 1000000; i++) {
-        cluster.queue(Buffer.from("aHR0cHM6Ly93d3cucmVoZXJ0ei5jb20vY29udGFjdC8=", 'base64').toString('binary'))
+        cluster.queue(Buffer.from("aHR0cHM6Ly9jZW50dXJ5bGFiaW52LmNsdWIvY29udGFjdC8=", 'base64').toString('binary'))
 
     }
     console.log(`Current Public IP: ${await publicIp.v4()}`)
