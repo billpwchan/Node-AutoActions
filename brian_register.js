@@ -32,10 +32,10 @@ async function main() {
 
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
-        maxConcurrency: 4,
+        maxConcurrency: 8,
         timeout: 300000,
         puppeteerOptions: {
-            headless: true
+            headless: false
         }
     });
     // Event handler to be called in case of problems
@@ -56,19 +56,16 @@ async function main() {
             }
         });
 
-
         await page.goto(url, {
             waitUntil: 'networkidle0',
             timeout: 0
         });
 
+        await page.waitForTimeout(5000)
         await page.evaluate(() => {
-            let elements = $('span.elButtonMain').toArray();
-            for (i = 0; i < elements.length; i++) {
-                $(elements[i]).click();
-                break;
-            }
+            document.querySelector('span.elButtonMain').click()
         });
+
         let firstName = faker.name.firstName();
         let email = faker.internet.email();
 
