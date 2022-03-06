@@ -33,9 +33,9 @@ async function main() {
     const cluster = await Cluster.launch({
         concurrency: Cluster.CONCURRENCY_CONTEXT,
         maxConcurrency: 8,
-        timeout: 300000,
+        timeout: 30000,
         puppeteerOptions: {
-            headless: false
+            headless: true
         }
     });
     // Event handler to be called in case of problems
@@ -44,9 +44,9 @@ async function main() {
     });
 
     await cluster.task(async ({
-        page,
-        data: url
-    }) => {
+                                  page,
+                                  data: url
+                              }) => {
         await page.setRequestInterception(true);
         page.on('request', (req) => {
             if (req.resourceType() === 'image') {
@@ -61,7 +61,7 @@ async function main() {
             timeout: 0
         });
 
-        await page.waitForTimeout(5000)
+        await page.waitForSelector("#tmp_button-51801-122-131-101")
         await page.evaluate(() => {
             document.querySelector('span.elButtonMain').click()
         });
@@ -69,7 +69,6 @@ async function main() {
         let firstName = faker.name.firstName();
         let email = faker.internet.email();
 
-        await page.waitForNavigation();
         await page.waitForSelector('#inf_field_FirstName');
 
         await page.type('#inf_field_FirstName', `${firstName}`);
@@ -79,10 +78,11 @@ async function main() {
         console.log(`Contact Form Submitted: ${firstName}: ${email}`);
 
         await page.waitForTimeout(1000)
+        return `Contact Form Submitted: ${firstName}: ${email}`;
     });
 
     for (let i = 0; i < 1000000; i++) {
-        cluster.queue(Buffer.from("aHR0cHM6Ly93d3cuYnJpYW5jaGEubWUv", 'base64').toString('binary'))
+        cluster.queue(Buffer.from("aHR0cHM6Ly93d3cuYnJpYW5jaGEubWUvYWNtLTE1Mjg1NTUyNA==", 'base64').toString('binary'))
 
     }
     console.log(`Current Public IP: ${await publicIp.v4()}`)
@@ -91,7 +91,8 @@ async function main() {
     await cluster.close();
 }
 
-main().catch(console.warn)
+main().then(response => console.log(response));
+
 
 async function autoScroll(page) {
     await page.evaluate(async () => {
