@@ -61,7 +61,8 @@ async function main() {
             timeout: 0
         });
 
-        await page.waitForTimeout(5000)
+        await page.waitForSelector('#tmp_button-51801-122-131-101')
+
         await page.evaluate(() => {
             document.querySelector('span.elButtonMain').click()
         });
@@ -82,7 +83,7 @@ async function main() {
     });
 
     for (let i = 0; i < 1000000; i++) {
-        cluster.queue(Buffer.from("aHR0cHM6Ly93d3cuYnJpYW5jaGEubWUv", 'base64').toString('binary'))
+        await cluster.queue(Buffer.from("aHR0cHM6Ly93d3cuYnJpYW5jaGEubWUvYWNtLTE1Mjg1NTUyNA==", 'base64').toString('binary'))
 
     }
     console.log(`Current Public IP: ${await publicIp.v4()}`)
