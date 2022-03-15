@@ -44,9 +44,9 @@ async function main() {
     });
 
     await cluster.task(async ({
-                                  page,
-                                  data: url
-                              }) => {
+        page,
+        data: url
+    }) => {
         await page.setRequestInterception(true);
         page.on('request', (req) => {
             if (req.resourceType() === 'image') {
