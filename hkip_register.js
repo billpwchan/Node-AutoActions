@@ -58,6 +58,7 @@ async function main() {
             waitUntil: 'networkidle0',
             timeout: 0
         });
+        await page.waitForSelector('a.jobsearch-open-register-tab')
         await page.evaluate(() => {
             document.querySelector('a.jobsearch-open-register-tab').click()
         });

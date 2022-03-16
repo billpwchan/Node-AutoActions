@@ -58,7 +58,7 @@ async function main() {
             waitUntil: 'networkidle0',
             timeout: 0
         });
-
+        await page.waitForSelector('input[name="your-name"]')
         let firstName = faker.name.firstName()
         let lastName = faker.name.lastName()
         let email = faker.internet.email()
